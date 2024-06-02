@@ -5,7 +5,7 @@ import Navbar from "../Components/Shared/Navbar";
 
 const Root = () => {
 	return (
-		<div className={`min-h-screen flex flex-col relative bg-defaultBg`}>
+		<div className={`min-h-screen flex flex-col relative`}>
 			<div className="absolute w-full top-0 z-40">
 				<Navbar></Navbar>
 			</div>

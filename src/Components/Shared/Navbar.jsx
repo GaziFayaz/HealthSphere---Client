@@ -3,18 +3,20 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { Link, NavLink } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { Tooltip } from "react-tooltip";
-import logo from '../../assets/logo-no-background.svg'
+import logo from "../../assets/logo-no-background.svg";
+import { FaAngleDown, FaShoppingCart } from "react-icons/fa";
+import { IoLanguage } from "react-icons/io5";
 
 const Navbar = () => {
 	const { user, loading, logout } = useContext(AuthContext);
-	const activeLinkAttr = "bg-theme2 rounded-lg";
+	const activeLinkAttr = "bg-black text-white rounded-lg";
 	if (loading) {
 		return <div className="navbar"></div>;
 	}
 
 	const routeItems = (
 		<>
-			<li className="h-full">
+			<li className="h-full text-xl">
 				<NavLink
 					to="/"
 					className={({ isActive }) => (isActive ? activeLinkAttr : "")}
@@ -22,21 +24,38 @@ const Navbar = () => {
 					Home
 				</NavLink>
 			</li>
-			<li className="h-full">
+			<li className="h-full text-xl">
 				<NavLink
-					to="/rooms"
+					to="/shop"
 					className={({ isActive }) => (isActive ? activeLinkAttr : "")}
 				>
-					Rooms
+					Shop
+				</NavLink>
+			</li>
+			<li className="h-full p-2">
+				<NavLink
+					to="/cart"
+					className={({ isActive }) =>
+						(isActive ? activeLinkAttr : "") + "px-0"
+					}
+				>
+					<FaShoppingCart className="text-2xl" />
 				</NavLink>
 			</li>
 			<li className="h-full">
-				<NavLink
-					to="/my-bookings"
-					className={({ isActive }) => (isActive ? activeLinkAttr : "")}
-				>
-					My Bookings
-				</NavLink>
+				<details>
+					<summary>
+						<IoLanguage className="text-2xl" />
+					</summary>
+					<ul className="p-2 bg-base-100 rounded-t-none">
+						<li>
+							<a>English</a>
+						</li>
+						<li>
+							<a>Bangla</a>
+						</li>
+					</ul>
+				</details>
 			</li>
 		</>
 	);
@@ -99,16 +118,7 @@ const Navbar = () => {
 										className={`${({ isActive }) =>
 											isActive ? activeLinkAttr : ""} focus:text-white`}
 									>
-										Login
-									</NavLink>
-								</li>
-								<li className="h-full">
-									<NavLink
-										to="/register"
-										className={`${({ isActive }) =>
-											isActive ? activeLinkAttr : ""} focus:text-white`}
-									>
-										Register
+										Join Us
 									</NavLink>
 								</li>
 							</>
@@ -148,20 +158,12 @@ const Navbar = () => {
 						</>
 					) : (
 						<>
-							<li className="h-full">
+							<li className="h-full text-xl bg-theme2 rounded-lg">
 								<NavLink
 									to="/login"
 									className={({ isActive }) => (isActive ? activeLinkAttr : "")}
 								>
-									Login
-								</NavLink>
-							</li>
-							<li className="h-full">
-								<NavLink
-									to="/register"
-									className={({ isActive }) => (isActive ? activeLinkAttr : "")}
-								>
-									Register
+									Join Us
 								</NavLink>
 							</li>
 						</>
