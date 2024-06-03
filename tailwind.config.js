@@ -7,8 +7,8 @@ module.exports = {
 		extend: {},
 		colors: {
 			...colors,
-			theme: "#1ABC9C",
-			theme2: "#A5D6D3",
+			theme: "#08C78E",
+			theme2: "#CAF2E1",
 			textPrimary: "#E0E0E0",
 			defaultBg: "#121212"
 		},
@@ -18,7 +18,7 @@ module.exports = {
 		},
 	},
 	daisyui: {
-		themes: ["black"],
+		themes: ["dark"],
 	},
 	plugins: [require("daisyui")],
 };

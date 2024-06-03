@@ -1,9 +1,11 @@
-
+import Slider from "./Slider";
 
 const Home = () => {
-  return (
-    <div className="text-white">Home</div>
-  )
-}
+	return (
+		<div className="mx-24">
+			<Slider></Slider>
+		</div>
+	);
+};
 
-export default Home
+export default Home;

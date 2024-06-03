@@ -4,7 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { Tooltip } from "react-tooltip";
 import logo from "../../assets/logo-no-background.svg";
-import { FaAngleDown, FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 import { IoLanguage } from "react-icons/io5";
 
 const Navbar = () => {
@@ -47,7 +47,7 @@ const Navbar = () => {
 					<summary>
 						<IoLanguage className="text-2xl" />
 					</summary>
-					<ul className="p-2 bg-base-100 rounded-t-none">
+					<ul className="p-2 bg-white rounded-xl text-black">
 						<li>
 							<a>English</a>
 						</li>
