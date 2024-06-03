@@ -1,9 +1,11 @@
+import Category from "./Category/Category";
 import Slider from "./Slider";
 
 const Home = () => {
 	return (
-		<div className="mx-24">
+		<div className="">
 			<Slider></Slider>
+      <Category></Category>
 		</div>
 	);
 };

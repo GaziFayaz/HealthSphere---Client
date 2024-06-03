@@ -9,7 +9,7 @@ const Root = () => {
 			<div className="w-full top-0 z-40">
 				<Navbar></Navbar>
 			</div>
-			<div>
+			<div className="mx-12 md:mx-24 lg:mx-32">
 				<Outlet></Outlet>
 				<ToastContainer />
 			</div>

@@ -6,7 +6,6 @@ import "aos/dist/aos.css";
 
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 
 const Slider = () => {
 	useEffect(() => {
@@ -38,11 +37,6 @@ const Slider = () => {
 			<h1 className="text-gray-700 font-medium md:text-3xl md:tracking-wide">
 				Get Your Flu Vaccines <strong>Now</strong>!
 			</h1>
-			<Link to={"/rooms"}>
-				<button className="btn bg-black text-amber-400 text-lg border-amber-400 font-lato">
-					Book Now
-				</button>
-			</Link>
 		</>,
 	];
 	return (
