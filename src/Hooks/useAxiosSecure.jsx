@@ -1,11 +1,34 @@
-import axios from "axios"
+import axios from "axios";
+import useAuth from "./useAuth";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const axiosSecure = axios.create({
-  baseUrl: 'http://localhost:5000'
-})
+	baseUrl: "http://localhost:5000",
+	withCredentials: true,
+});
 
 const useAxiosSecure = () => {
-  return axiosSecure;
-}
+	const { logout } = useAuth();
+	const navigate = useNavigate();
 
-export default useAxiosSecure
+	// intercepts 401 and 403 status codes
+	axiosSecure.interceptors.response.use(
+		(response) => {
+			return response;
+		},
+		async (error) => {
+			const status = error.response?.status;
+
+			// for 401 and 403 logout the user and move the user to the login page
+			if (status === 401 || status === 403) {
+				await logout();
+				navigate("/login");
+			}
+		}
+	);
+
+	return axiosSecure;
+};
+
+export default useAxiosSecure;
