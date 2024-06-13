@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet-async";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { AuthContext } from "../../Providers/AuthProvider";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Login = () => {
 	useEffect(() => {
@@ -28,6 +29,7 @@ const Login = () => {
 	} = useContext(AuthContext);
 	const navigate = useNavigate();
 	const location = useLocation();
+	const axiosPublic = useAxiosPublic();
 
 	const [showPassword, setShowPassword] = useState(false);
 
@@ -54,30 +56,23 @@ const Login = () => {
 		signInGoogle()
 			.then((userCredential) => {
 				successToast("Login Successful");
-				// console.log(userCredential.user.uid);
-				fetch(`http://localhost:5000/user/${userCredential.user.uid}`)
-					.then((res) => res.json())
-					.catch(() => {
-						// console.log(data)
-						console.log("new user");
-						const createdAt = userCredential.user?.metadata?.creationTime;
-						const user_email = userCredential.user.email;
-						const firebase_uid = userCredential.user.uid;
-						const role = "Customer";
-						const newUser = {
-							user_email,
-							firebase_uid,
-							role,
-							createdAt: createdAt,
-						};
-						fetch("http://localhost:5000/user", {
-							method: "POST",
-							headers: {
-								"content-type": "application/json",
-							},
-							body: JSON.stringify(newUser),
-						});
-					});
+				const createdAt = userCredential.user?.metadata?.creationTime;
+				const user_email = userCredential.user.email;
+				const firebase_uid = userCredential.user.uid;
+				const role = "Customer";
+				const newUser = {
+					user_email,
+					firebase_uid,
+					role,
+					createdAt: createdAt,
+				};
+				axiosPublic.get("/users", {
+					method: "POST",
+					headers: {
+						"content-type": "application/json",
+					},
+					body: JSON.stringify(newUser),
+				});
 			})
 			.catch((error) => {
 				// // Handle Errors here.
@@ -100,30 +95,24 @@ const Login = () => {
 		signInGithub()
 			.then((userCredential) => {
 				successToast("Login Successful");
-				// console.log(userCredential.user.uid);
-				fetch(`http://localhost:5000/user/${userCredential.user.uid}`)
-					.then((res) => res.json())
-					.catch(() => {
-						// console.log(data)
-						console.log("new user");
-						const createdAt = userCredential.user?.metadata?.creationTime;
-						const user_email = userCredential.user.email;
-						const firebase_uid = userCredential.user.uid;
-						const role = "Customer";
-						const newUser = {
-							user_email,
-							firebase_uid,
-							role,
-							createdAt: createdAt,
-						};
-						fetch("http://localhost:5000/user", {
-							method: "POST",
-							headers: {
-								"content-type": "application/json",
-							},
-							body: JSON.stringify(newUser),
-						});
-					});
+				console.log("new user");
+				const createdAt = userCredential.user?.metadata?.creationTime;
+				const user_email = userCredential.user.email;
+				const firebase_uid = userCredential.user.uid;
+				const role = "Customer";
+				const newUser = {
+					user_email,
+					firebase_uid,
+					role,
+					createdAt: createdAt,
+				};
+				axiosPublic.get("/users", {
+					method: "POST",
+					headers: {
+						"content-type": "application/json",
+					},
+					body: JSON.stringify(newUser),
+				});
 			})
 			.catch((error) => {
 				console.log(error);
@@ -157,7 +146,9 @@ const Login = () => {
 					action=""
 					className="mx-auto flex flex-col gap-4 w-full md:w-[500px] lg:min-w-[550px] lg:w-[2/3] items-center py-8 md:py-12 px-4 md:px-12 bg-theme rounded-2xl md:rounded-3xl"
 				>
-					<h1 className="text-3xl font-bold text-center text-black font-slab">Login</h1>
+					<h1 className="text-3xl font-bold text-center text-black font-slab">
+						Login
+					</h1>
 					<div className="w-full">
 						<p className="text-xl font-semibold text-black mb-2">Email</p>
 						<input

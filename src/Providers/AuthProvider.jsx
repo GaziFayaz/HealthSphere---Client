@@ -8,9 +8,11 @@ import {
 	signOut,
 	signInWithEmailAndPassword,
 	updateProfile,
-  GithubAuthProvider,
+	GithubAuthProvider,
 } from "firebase/auth";
 import { app } from "../Firebase/firebase.config";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -19,11 +21,26 @@ const githubProvider = new GithubAuthProvider();
 const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
 	const [loading, setLoading] = useState(true);
+	const axiosPublic = useAxiosPublic();
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (loggedInUser) => {
-			// console.log(loggedInUser);
+			console.log(loggedInUser);
 			setUser(loggedInUser);
+			if (loggedInUser) {
+				const user = { email: loggedInUser.email };
+				axiosPublic.post("/jwt", user, {withCredentials:true})
+				.then((res) => {
+					console.log("jwt response", res.data)
+				});
+			}
+			else {
+				axiosPublic.post("/logout", loggedInUser)
+				.then((res) => {
+					console.log("jwt response on logout", res.data)
+				})
+			}
+
 			setLoading(false);
 		});
 		return () => unsubscribe();
@@ -48,14 +65,14 @@ const AuthProvider = ({ children }) => {
 	};
 
 	const signInGoogle = () => {
-    setLoading(true);
+		setLoading(true);
 		return signInWithPopup(auth, googleProvider);
 	};
 
-  const signInGithub = () => {
-    setLoading(true);
-    return signInWithPopup(auth, githubProvider);
-  }
+	const signInGithub = () => {
+		setLoading(true);
+		return signInWithPopup(auth, githubProvider);
+	};
 
 	const logout = () => {
 		setLoading(true);
@@ -71,7 +88,7 @@ const AuthProvider = ({ children }) => {
 		signInEmailPassword,
 		customizeProfile,
 		signInGoogle,
-    signInGithub,
+		signInGithub,
 		logout,
 	};
 

@@ -1,29 +1,30 @@
-import { FaEye } from "react-icons/fa";
-import { MdOutlineAddShoppingCart } from "react-icons/md";
-import ProductModal from "../Product/ProductModal";
+import { useParams } from "react-router-dom";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useEffect, useState } from "react";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import ProductModal from "../../Product/ProductModal";
+import { MdOutlineAddShoppingCart } from "react-icons/md";
+import { FaEye } from "react-icons/fa";
 
-const Shop = () => {
+const CategoryDetails = () => {
 	const axiosPublic = useAxiosPublic();
-	const [loading, setLoading] = useState(true)
-	const [medicines, setMedicines] = useState([]);
+	const { slug } = useParams();
+	const [loading, setLoading] = useState(true);
+	const [category, setCategory] = useState({});
 
 	useEffect(() => {
-		axiosPublic.get("/products").then((res) => {
+		axiosPublic.get(`/categories/${slug}`).then((res) => {
 			console.log(res.data);
-			setMedicines(res.data);
+			setCategory(res.data);
 			setLoading(false);
 		});
 	}, []);
 
-	if (loading) 
-		return <div>Loading...</div>
+	if (loading) return <div>Loading...</div>;
 
 	return (
 		<div className="w-full mt-24">
-			<h1 className="mb-8 text-2xl md:text-4xl lg:text-5xl font-slab font-bold text-theme2 text-center ">
-				Shop
+			<h1 className="mb-8 text-2xl md:text-3xl lg:text-4xl font-slab font-bold text-theme2 text-center ">
+				{category.name}
 			</h1>
 			<div className="overflow-x-auto">
 				<table className="table table-zebra text-center">
@@ -42,7 +43,7 @@ const Shop = () => {
 						</tr>
 					</thead>
 					<tbody className="lg:text-lg font-roboto text-gray-300">
-						{medicines.map((medicine, index) => {
+						{category.categoryProducts.map((medicine, index) => {
 							return (
 								<tr key={index}>
 									<td>
@@ -108,4 +109,4 @@ const Shop = () => {
 	);
 };
 
-export default Shop;
+export default CategoryDetails;

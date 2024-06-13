@@ -7,22 +7,27 @@ import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { Helmet } from "react-helmet-async";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import axios from "axios";
 
 const Register = () => {
 	useEffect(() => {
 		AOS.init();
 		AOS.refresh();
 	}, []);
+
 	const successToast = (message) =>
 		toast.success(message, { position: "bottom-right" });
 	const errorToast = (message) =>
 		toast.error(message, { position: "bottom-right" });
+
 	const { loading, setLoading, createUserEmailPassword, customizeProfile } =
 		useContext(AuthContext);
+
+	const axiosPublic = useAxiosPublic();
 	const navigate = useNavigate();
 	const [showPassword, setShowPassword] = useState(false);
-
-	const { register, handleSubmit, watch } = useForm();
+	const { register, handleSubmit, reset, watch } = useForm();
 
 	const onSubmit = (data) => {
 		console.log(data);
@@ -51,29 +56,28 @@ const Register = () => {
 			.then((userCredential) => {
 				// Signed up
 				console.log(userCredential);
-				const createdAt = userCredential.user?.metadata?.creationTime;
-				const user_email = userCredential.user.email;
-				const firebase_uid = userCredential.user.uid;
-				const role = data.role
-				const newUser = {
-					user_email,
-					firebase_uid,
-					role,
-					createdAt: createdAt,
-				};
-				fetch("http://localhost:5000/user", {
-					method: "POST",
-					headers: {
-						"content-type": "application/json",
-					},
-					body: JSON.stringify(newUser),
-				});
 				customizeProfile(data.name, data.photoUrl)
-					.then((userCredential) => {
-						console.log(userCredential);
-						successToast("Registration Successful");
-						window.location.reload();
-						return <Navigate to="/" />;
+					.then(() => {
+						const createdAt = userCredential.user?.metadata?.creationTime;
+						const user_email = userCredential.user.email;
+						const firebase_uid = userCredential.user.uid;
+						const role = data.role;
+						const newUser = {
+							user_email,
+							firebase_uid,
+							role,
+							createdAt: createdAt,
+						};
+
+						axiosPublic.post("/users", newUser).then((res) => {
+							if (res.data.insertedId) {
+								console.log("User created successfully");
+								reset();
+								successToast("Registration Successful");
+								window.location.reload();
+								navigate("/")
+							}
+						});
 					})
 					.catch((error) => {
 						console.log(error);
@@ -135,14 +139,14 @@ const Register = () => {
 							{...register("role", { required: true })}
 							type="radio"
 							value="Customer"
-              className="w-4 h-4 radio radio-primary bg-white"
+							className="w-4 h-4 radio radio-primary bg-white"
 						/>
-            <p>Customer</p>
+						<p>Customer</p>
 						<input
 							{...register("role", { required: true })}
 							type="radio"
 							value="Seller"
-              className="w-4 h-4 radio radio-primary bg-white"
+							className="w-4 h-4 radio radio-primary bg-white"
 						/>
 						<p>Seller</p>
 					</div>
@@ -183,7 +187,7 @@ const Register = () => {
 							id="password"
 							placeholder="Your Password"
 							required
-							className="border-b-2 bg-theme2 border-gray-400 w-full p-2 rounded-xl"
+							className="border-b-2 bg-theme2 border-gray-400 w-full p-2 rounded-xl text-black"
 						/>
 						{showPassword ? (
 							<BsEyeFill
