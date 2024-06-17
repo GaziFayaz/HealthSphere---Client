@@ -66,13 +66,7 @@ const Login = () => {
 					role,
 					createdAt: createdAt,
 				};
-				axiosPublic.get("/users", {
-					method: "POST",
-					headers: {
-						"content-type": "application/json",
-					},
-					body: JSON.stringify(newUser),
-				});
+				axiosPublic.post("/users", newUser);
 			})
 			.catch((error) => {
 				// // Handle Errors here.
@@ -95,7 +89,6 @@ const Login = () => {
 		signInGithub()
 			.then((userCredential) => {
 				successToast("Login Successful");
-				console.log("new user");
 				const createdAt = userCredential.user?.metadata?.creationTime;
 				const user_email = userCredential.user.email;
 				const firebase_uid = userCredential.user.uid;
@@ -106,13 +99,7 @@ const Login = () => {
 					role,
 					createdAt: createdAt,
 				};
-				axiosPublic.get("/users", {
-					method: "POST",
-					headers: {
-						"content-type": "application/json",
-					},
-					body: JSON.stringify(newUser),
-				});
+				axiosPublic.post("/users", newUser);
 			})
 			.catch((error) => {
 				console.log(error);

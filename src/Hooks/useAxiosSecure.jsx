@@ -1,12 +1,11 @@
 import axios from "axios";
 import useAuth from "./useAuth";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 const axiosSecure = axios.create({
-	baseUrl: "http://localhost:5000",
-	withCredentials: true,
-});
+  baseURL: 'http://localhost:5000',
+	withCredentials: true
+})
 
 const useAxiosSecure = () => {
 	const { logout } = useAuth();

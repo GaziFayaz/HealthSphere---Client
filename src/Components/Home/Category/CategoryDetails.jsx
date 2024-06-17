@@ -2,8 +2,8 @@ import { useParams } from "react-router-dom";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useEffect, useState } from "react";
 import ProductModal from "../../Product/ProductModal";
-import { MdOutlineAddShoppingCart } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
+import AddToCartButton from "../../Cart/AddToCartButton";
 
 const CategoryDetails = () => {
 	const axiosPublic = useAxiosPublic();
@@ -13,7 +13,6 @@ const CategoryDetails = () => {
 
 	useEffect(() => {
 		axiosPublic.get(`/categories/${slug}`).then((res) => {
-			console.log(res.data);
 			setCategory(res.data);
 			setLoading(false);
 		});
@@ -87,12 +86,7 @@ const CategoryDetails = () => {
 													document.getElementById(`modal${index}`).showModal();
 												}}
 											/>
-											<MdOutlineAddShoppingCart
-												className="text-theme hover:text-theme2 text-2xl cursor-pointer"
-												data-tooltip-id="my-tooltip"
-												data-tooltip-content="Add to Cart"
-												data-tooltip-place="bottom"
-											/>
+											<AddToCartButton product={medicine}></AddToCartButton>
 											<ProductModal
 												modalId={`modal${index}`}
 												modalData={medicine}

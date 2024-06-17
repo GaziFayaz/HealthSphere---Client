@@ -1,8 +1,8 @@
 import { FaEye } from "react-icons/fa";
-import { MdOutlineAddShoppingCart } from "react-icons/md";
 import ProductModal from "../Product/ProductModal";
 import { useEffect, useState } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import AddToCartButton from "../Cart/AddToCartButton";
 
 const Shop = () => {
 	const axiosPublic = useAxiosPublic();
@@ -11,7 +11,6 @@ const Shop = () => {
 
 	useEffect(() => {
 		axiosPublic.get("/products").then((res) => {
-			console.log(res.data);
 			setMedicines(res.data);
 			setLoading(false);
 		});
@@ -86,12 +85,7 @@ const Shop = () => {
 													document.getElementById(`modal${index}`).showModal();
 												}}
 											/>
-											<MdOutlineAddShoppingCart
-												className="text-theme hover:text-theme2 text-2xl cursor-pointer"
-												data-tooltip-id="my-tooltip"
-												data-tooltip-content="Add to Cart"
-												data-tooltip-place="bottom"
-											/>
+											<AddToCartButton product={medicine}></AddToCartButton>
 											<ProductModal
 												modalId={`modal${index}`}
 												modalData={medicine}
