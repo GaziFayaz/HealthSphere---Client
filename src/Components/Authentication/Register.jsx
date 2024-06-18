@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -8,7 +8,6 @@ import { Helmet } from "react-helmet-async";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import axios from "axios";
 
 const Register = () => {
 	useEffect(() => {
