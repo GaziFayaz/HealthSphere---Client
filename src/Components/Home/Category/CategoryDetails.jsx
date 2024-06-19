@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import ProductModal from "../../Product/ProductModal";
 import { FaEye } from "react-icons/fa";
 import AddToCartButton from "../../Cart/AddToCartButton";
+import { Helmet } from "react-helmet-async";
 
 const CategoryDetails = () => {
 	const axiosPublic = useAxiosPublic();
@@ -22,6 +23,9 @@ const CategoryDetails = () => {
 
 	return (
 		<div className="w-full mt-24">
+			<Helmet>
+				<title>HealthSphere | {category.name}</title>
+			</Helmet>
 			<h1 className="mb-8 text-2xl md:text-3xl lg:text-4xl font-slab font-bold text-theme2 text-center ">
 				{category.name}
 			</h1>

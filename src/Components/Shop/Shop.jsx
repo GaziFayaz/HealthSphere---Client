@@ -3,6 +3,7 @@ import ProductModal from "../Product/ProductModal";
 import { useEffect, useState } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import AddToCartButton from "../Cart/AddToCartButton";
+import { Helmet } from "react-helmet-async";
 
 const Shop = () => {
 	const axiosPublic = useAxiosPublic();
@@ -21,6 +22,9 @@ const Shop = () => {
 
 	return (
 		<div className="w-full mt-24">
+			<Helmet>
+					<title>HealthSphere | Shop</title>
+				</Helmet>
 			<h1 className="mb-8 text-2xl md:text-4xl lg:text-5xl font-slab font-bold text-theme2 text-center ">
 				Shop
 			</h1>

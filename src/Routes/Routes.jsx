@@ -7,6 +7,7 @@ import Shop from "../Components/Shop/Shop";
 import CategoryDetails from "../Components/Home/Category/CategoryDetails";
 import PrivateRoute from "./PrivateRoute";
 import Cart from "../Components/Cart/Cart";
+import Checkout from "../Components/Checkout/Checkout";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
           path: "/cart",
           element: <PrivateRoute><Cart></Cart></PrivateRoute>
+      },
+      {
+          path: "/checkout",
+          element: <PrivateRoute><Checkout></Checkout></PrivateRoute>
       }
     ]
   }

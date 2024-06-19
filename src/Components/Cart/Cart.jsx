@@ -1,6 +1,8 @@
 import { FaEye } from "react-icons/fa";
 import useCart from "../../Hooks/useCart";
 import ProductModal from "../Product/ProductModal";
+import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Cart = () => {
 	const { cart, changeQuantity, clearCart } = useCart();
@@ -18,6 +20,9 @@ const Cart = () => {
 
 	return (
 		<div className="w-full mt-24">
+			<Helmet>
+				<title>HealthSphere | My Cart</title>
+			</Helmet>
 			<h1 className="mb-8 text-2xl md:text-4xl lg:text-5xl font-slab font-bold text-theme2 text-center ">
 				My Cart
 			</h1>
@@ -129,9 +134,11 @@ const Cart = () => {
 					>
 						Clear Cart
 					</button>
-					<button className="btn bg-green-500 text-white text-lg  hover:bg-green-700">
-						Checkout
-					</button>
+					<Link to={"/checkout"}>
+						<button className="btn bg-green-500 text-white text-lg  hover:bg-green-700">
+							Checkout
+						</button>
+					</Link>
 				</div>
 			</div>
 		</div>
