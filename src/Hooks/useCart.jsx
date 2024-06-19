@@ -23,6 +23,7 @@ const useCart = () => {
 	};
 
 	const clearCart = (cartId) => {
+		console.log("clear cart clicked", cartId)
 		axiosSecure.delete(`/carts/clear/${cartId}`).then(() => {
 			refetch();
 		});

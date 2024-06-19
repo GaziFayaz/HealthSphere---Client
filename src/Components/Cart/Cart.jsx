@@ -3,7 +3,7 @@ import useCart from "../../Hooks/useCart";
 import ProductModal from "../Product/ProductModal";
 
 const Cart = () => {
-	const { cart, changeQuantity } = useCart();
+	const { cart, changeQuantity, clearCart } = useCart();
 	console.log("cart", cart);
 
 	if (!cart?.items?.length)
@@ -125,7 +125,7 @@ const Cart = () => {
 				<div className="flex gap-6 justify-end mt-5">
 					<button
 						className="btn bg-red-500 text-white text-lg hover:bg-red-700"
-						onClick={() => {}}
+						onClick={() => clearCart(cart._id)}
 					>
 						Clear Cart
 					</button>
