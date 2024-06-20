@@ -114,7 +114,7 @@ const Register = () => {
 				data-aos="fade-down"
 				onSubmit={handleSubmit(onSubmit)}
 				action=""
-				className="mx-auto flex flex-col gap-4 w-full md:w-[500px] lg:min-w-[550px] lg:w-[2/3] items-center py-8 md:py-12 px-4 md:px-12 bg-theme rounded-2xl md:rounded-3xl"
+				className="mx-auto flex flex-col gap-4 w-full md:w-[500px] lg:min-w-[550px] lg:w-[2/3] items-center py-8 md:py-12 px-4 md:px-12 bg-theme rounded-2xl md:rounded-3xl text-black"
 			>
 				<h1 className="text-3xl font-bold text-center text-black font-slab">
 					Register

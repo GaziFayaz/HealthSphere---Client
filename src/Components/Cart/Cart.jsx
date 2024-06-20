@@ -1,12 +1,26 @@
 import { FaEye } from "react-icons/fa";
 import useCart from "../../Hooks/useCart";
 import ProductModal from "../Product/ProductModal";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { useEffect, useState } from "react";
 
 const Cart = () => {
+	const navigate = useNavigate();
 	const { cart, changeQuantity, clearCart } = useCart();
+	const [aboveHundred, setAboveHundred] = useState(false);
 	console.log("cart", cart);
+
+	useEffect(() => {
+		const price = cart?.items?.reduce((acc, item) => {
+			return acc + item.unit_prices[0].price * item.quantity;
+		}, 0);
+		if (price < 100) {
+			setAboveHundred(false);
+		} else {
+			setAboveHundred(true);
+		}
+	}, [cart]);
 
 	if (!cart?.items?.length)
 		return (
@@ -127,6 +141,14 @@ const Cart = () => {
 						})}
 					</tbody>
 				</table>
+				<div>
+					<p className="text-right mt-5">
+						Total Price: Tk.
+						{parseFloat(cart?.items.reduce((acc, item) => {
+							return acc + item.unit_prices[0].price * item.quantity;
+						}, 0).toFixed(2))}
+					</p>
+				</div>
 				<div className="flex gap-6 justify-end mt-5">
 					<button
 						className="btn bg-red-500 text-white text-lg hover:bg-red-700"
@@ -134,11 +156,18 @@ const Cart = () => {
 					>
 						Clear Cart
 					</button>
-					<Link to={"/checkout"}>
-						<button className="btn bg-green-500 text-white text-lg  hover:bg-green-700">
+					<div className="flex flex-col">
+						<button
+							disabled={!aboveHundred}
+							className="btn bg-green-500 text-white text-lg  hover:bg-green-700"
+							onClick={() => {
+								navigate("/checkout");
+							}}
+						>
 							Checkout
 						</button>
-					</Link>
+						{!aboveHundred && <p className="text-red-500">Total price must be atleast 100 Tk.</p>}
+					</div>
 				</div>
 			</div>
 		</div>

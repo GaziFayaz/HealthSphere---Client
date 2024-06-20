@@ -8,6 +8,8 @@ import {
 } from "@stripe/react-stripe-js";
 
 import "./styles.css";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { useNavigate } from "react-router-dom";
 
 const useOptions = () => {
 	const fontSize = "18px";
@@ -34,7 +36,9 @@ const useOptions = () => {
 	return options;
 };
 
-const CheckoutForm = ({ clientSecret, user }) => {
+const CheckoutForm = ({ orderData, clientSecret, user, cart, price }) => {
+	const axiosSecure = useAxiosSecure()
+	const navigate = useNavigate();
 	const [error, setError] = useState("");
 	const stripe = useStripe();
 	const elements = useElements();
@@ -64,7 +68,7 @@ const CheckoutForm = ({ clientSecret, user }) => {
 
 		setIsLoading(true);
 
-		const { error: cardError, paymentMethod } =
+		const { error: cardError } =
 			await stripe.createPaymentMethod({
 				type: "card",
 				card: elements.getElement(CardNumberElement),
@@ -110,6 +114,25 @@ const CheckoutForm = ({ clientSecret, user }) => {
 							setMessage("Something went wrong.");
 							break;
 					}
+
+          if(paymentIntent.status === "succeeded"){
+            const payment = {
+              ...orderData,
+              price: price,
+              date: new Date(),
+              items: cart.items,
+              transaction_id: paymentIntent.id,	
+            }
+						axiosSecure.post('/create-order', payment)
+						.then(res => {
+							if(res.data.insertedId){
+								axiosSecure.delete(`/carts/clear/${cart._id}`)
+								.then(() => {
+									navigate('/invoice')
+								})
+							}
+						})
+          }
 				});
 			});
 	};

@@ -14,7 +14,7 @@ const AddToCartButton = ({ product }) => {
       console.log(res.data)
       if(res?.data.modifiedCount || res?.data.insertedId){
 				toast.success("Product added to cart successfully!", {
-					position: "bottom-right",
+					position: "bottom-left",
 					autoClose: 3000,
 					hideProgressBar: false,
 					closeOnClick: true,

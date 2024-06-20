@@ -3,6 +3,7 @@ import useCart from "../../Hooks/useCart";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
 import Payment from "../Payment/Payment";
+import { useState } from "react";
 
 const Checkout = () => {
 	const { cart } = useCart();
@@ -10,11 +11,11 @@ const Checkout = () => {
 	const { register, handleSubmit, formState: { errors }, } = useForm({
 		defaultValues: {name: user?.displayName, email: user?.email}
 	})
+	const [orderData, setOrderData] = useState({});
   // console.log(watch("name"));
   console.log(errors);
 	const onSubmit = (data) => {
-
-		// console.log(data);
+		setOrderData(data)
     document.getElementById(`payment-modal`).showModal();
 	};
 
@@ -93,7 +94,7 @@ const Checkout = () => {
 					className="btn w-full text-xl border-none bg-theme2 text-black hover:bg-gray-500"
 				/>
 			</form>
-      <Payment></Payment>
+      <Payment orderData={orderData}></Payment>
 		</div>
 	);
 };

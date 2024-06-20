@@ -8,6 +8,7 @@ import CategoryDetails from "../Components/Home/Category/CategoryDetails";
 import PrivateRoute from "./PrivateRoute";
 import Cart from "../Components/Cart/Cart";
 import Checkout from "../Components/Checkout/Checkout";
+import Invoice from "../Components/Invoice/Invoice";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
       {
           path: "/checkout",
           element: <PrivateRoute><Checkout></Checkout></PrivateRoute>
+      },
+      {
+        path: "/invoice",
+        element: <PrivateRoute><Invoice></Invoice></PrivateRoute>
       }
     ]
   }

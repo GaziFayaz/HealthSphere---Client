@@ -9,7 +9,7 @@ import useAuth from "../../Hooks/useAuth";
 // add publishable key
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
-const Payment = () => {
+const Payment = ({orderData}) => {
 	const {user} = useAuth();
 	const { cart } = useCart();
 	const axiosSecure = useAxiosSecure();
@@ -28,7 +28,7 @@ const Payment = () => {
 		<dialog id="payment-modal" className="modal">
 			<div className="modal-box text-left lg:py-20 lg:px-16">
 					<Elements stripe={stripePromise}>
-						<CheckoutForm clientSecret={clientSecret} user={user}></CheckoutForm>
+						<CheckoutForm orderData={orderData} clientSecret={clientSecret} user={user} cart={cart} price={price}></CheckoutForm>
 					</Elements>
 			</div>
 			<form method="dialog" className="modal-backdrop">
