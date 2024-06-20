@@ -7,7 +7,7 @@ import Payment from "../Payment/Payment";
 const Checkout = () => {
 	const { cart } = useCart();
 	const { user } = useAuth();
-	const { register, handleSubmit,watch, formState: { errors }, } = useForm({
+	const { register, handleSubmit, formState: { errors }, } = useForm({
 		defaultValues: {name: user?.displayName, email: user?.email}
 	})
   // console.log(watch("name"));
