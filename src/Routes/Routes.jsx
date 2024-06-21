@@ -9,6 +9,7 @@ import PrivateRoute from "./PrivateRoute";
 import Cart from "../Components/Cart/Cart";
 import Checkout from "../Components/Checkout/Checkout";
 import Invoice from "../Components/Invoice/Invoice";
+import UpdateProfile from "../Components/UpdateProfile/UpdateProfile";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>
+      },
+      {
+        path: "/update-profile",
+        element: <PrivateRoute><UpdateProfile></UpdateProfile></PrivateRoute>
       },
       {
           path: "/cart",

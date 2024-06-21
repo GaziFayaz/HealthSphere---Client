@@ -176,7 +176,7 @@ const Invoice = () => {
 			<h1 className="mb-8 text-2xl md:text-4xl lg:text-5xl font-slab font-bold text-theme2 text-center ">
 				Invoice
 			</h1>
-			<div className="grid grid-cols-2 gap-4 mb-20">
+			<div className="grid md:grid-cols-2 gap-4 mb-20">
 				<p className="text-2xl text-gray-300">
 					<span className="font-semibold text-theme">Order ID:</span>{" "}
 					{orders[0]?.transaction_id}

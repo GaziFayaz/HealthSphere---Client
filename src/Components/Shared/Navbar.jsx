@@ -6,9 +6,15 @@ import { Tooltip } from "react-tooltip";
 import logo from "../../assets/logo-no-background.svg";
 import { FaShoppingCart } from "react-icons/fa";
 import { IoLanguage } from "react-icons/io5";
+import useAdmin from "../../Hooks/useAdmin";
+import useCustomer from "../../Hooks/useCustomer";
+import useSeller from "../../Hooks/useSeller";
 
 const Navbar = () => {
 	const { user, loading, logout } = useContext(AuthContext);
+	const [isAdmin, isAdminPending] = useAdmin();
+	const [isCustomer, isCustomerPending] = useCustomer();
+	const [isSeller, isSellerPending] = useSeller();
 	const activeLinkAttr = "bg-black text-white rounded-lg";
 	if (loading) {
 		return <div className="navbar"></div>;
@@ -61,7 +67,7 @@ const Navbar = () => {
 	);
 
 	return (
-		<div className="navbar text-white font-slab bg-theme">
+		<div className="navbar text-white font-slab bg-theme flex">
 			<Tooltip id="my-tooltip" />
 			<div className="navbar-start w-auto">
 				<div className="dropdown">
@@ -88,27 +94,7 @@ const Navbar = () => {
 						{routeItems}
 						{user ? (
 							<>
-								<li>
-									<button onClick={() => logout()}>Logout</button>
-								</li>
-								<li
-									className="h-full mt-1"
-									data-tooltip-id="my-tooltip"
-									data-tooltip-content={user.displayName}
-									data-tooltip-place="top"
-								>
-									<div className="h-full">
-										{user.photoURL ? (
-											<img
-												src={user.photoURL}
-												alt="profile"
-												className="h-10 w-10 rounded-full"
-											></img>
-										) : (
-											<CgProfile className=" text-3xl text-black  rounded-full  object-cover"></CgProfile>
-										)}
-									</div>
-								</li>
+								
 							</>
 						) : (
 							<>
@@ -134,27 +120,6 @@ const Navbar = () => {
 					{routeItems}
 					{user ? (
 						<>
-							<Link
-								to={"/"}
-								className="text-lg text-lato font-light px-4 py-2"
-								onClick={() => logout()}
-							>
-								Logout
-							</Link>
-							<li
-								className="ml-4 h-full"
-								data-tooltip-id="my-tooltip"
-								data-tooltip-content={user.displayName}
-								data-tooltip-place="top"
-							>
-								<div className="h-full p-0">
-									<img
-										src={user.photoURL}
-										alt="profile"
-										className="h-10 w-10 rounded-full object-cover"
-									></img>
-								</div>
-							</li>
 						</>
 					) : (
 						<>
@@ -170,6 +135,46 @@ const Navbar = () => {
 					)}
 				</ul>
 			</div>
+			{user ? (
+				<div className="flex-1 justify-end">
+					<div
+						className=" h-full "
+						data-tooltip-id="my-tooltip"
+						data-tooltip-content={user.displayName}
+						data-tooltip-place="bottom-start"
+					>
+						<div className="dropdown dropdown-end">
+							<div
+								tabIndex={0}
+								role="button"
+								className="btn btn-ghost btn-circle avatar"
+							>
+								<div className="w-10 rounded-full">
+									<img alt="profile" src={user.photoURL} />
+								</div>
+							</div>
+							<ul
+								tabIndex={0}
+								className="mt-2 z-[1] p-2 shadow menu menu-sm dropdown-content bg-theme2 rounded-box text-black font-bold"
+							>
+								<li>
+									<Link to={"/update-profile"} className="text-lg text-nowrap">Update Profile</Link>
+								</li>
+								<li>
+									<Link className="text-lg">Dashboard</Link>
+								</li>
+								<li>
+									<Link to={"/"} className="text-lg" onClick={() => logout()}>
+										Logout
+									</Link>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			) : (
+				<></>
+			)}
 		</div>
 	);
 };
