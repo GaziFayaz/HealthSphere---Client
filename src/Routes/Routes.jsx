@@ -15,6 +15,12 @@ import SellerDashboard from "../Layouts/SellerDashboard";
 import SellerRoute from "./SellerRoute";
 import AdminRoute from "./AdminRoute";
 import AdminDashboard from "../Layouts/AdminDashboard";
+import AdminHome from "../Components/Admin/AdminHome";
+import User from "../Components/Admin/User";
+import Category from "../Components/Admin/Category";
+import Payment from "../Components/Admin/Payment";
+import Sales from "../Components/Admin/Sales";
+import Banner from "../Components/Admin/Banner";
 
 export const router = createBrowserRouter([
 	{
@@ -98,6 +104,55 @@ export const router = createBrowserRouter([
 				<AdminDashboard></AdminDashboard>
 			</AdminRoute>
 		),
+		children: [
+			{
+				path: "/admin-dashboard/overview",
+				element: (
+					<AdminRoute>
+						<AdminHome></AdminHome>
+					</AdminRoute>
+				),
+			},
+			{
+				path: "/admin-dashboard/manage-user",
+				element: (
+					<AdminRoute>
+						<User></User>
+					</AdminRoute>
+				),
+			},
+			{
+				path: "/admin-dashboard/manage-category",
+				element: (
+					<AdminRoute>
+						<Category></Category>
+					</AdminRoute>
+				),
+			},
+			{
+				path: "/admin-dashboard/manage-payment",
+				element: (
+					<AdminRoute>
+						<Payment></Payment>
+					</AdminRoute>
+				),
+			},
+			{
+				path: "/admin-dashboard/sales",
+				element: (
+					<AdminRoute>
+						<Sales></Sales>
+					</AdminRoute>
+				),
+			},
+			{
+				path: "/admin-dashboard/manage-banner",
+				element: (
+					<AdminRoute>
+						<Banner></Banner>
+					</AdminRoute>
+				),
+			},
+		],
 	},
-  
 ]);

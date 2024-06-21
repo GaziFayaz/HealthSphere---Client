@@ -162,7 +162,7 @@ const Navbar = () => {
 								</li>
 								{user && isAdmin && (
 									<li>
-										<Link to={"/admin-dashboard"} className="text-lg text-nowrap">Admin Dashboard</Link>
+										<Link to={"/admin-dashboard/overview"} className="text-lg text-nowrap">Admin Dashboard</Link>
 									</li>
 								)}
 								{user && isSeller && (
