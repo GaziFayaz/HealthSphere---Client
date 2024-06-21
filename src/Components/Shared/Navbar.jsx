@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { Link, NavLink } from "react-router-dom";
-import { CgProfile } from "react-icons/cg";
 import { Tooltip } from "react-tooltip";
 import logo from "../../assets/logo-no-background.svg";
 import { FaShoppingCart } from "react-icons/fa";
@@ -15,8 +14,11 @@ const Navbar = () => {
 	const [isAdmin, isAdminPending] = useAdmin();
 	const [isCustomer, isCustomerPending] = useCustomer();
 	const [isSeller, isSellerPending] = useSeller();
+
+	console.log(isCustomer)
+
 	const activeLinkAttr = "bg-black text-white rounded-lg";
-	if (loading) {
+	if (loading || isAdminPending || isCustomerPending || isSellerPending) {
 		return <div className="navbar"></div>;
 	}
 
@@ -93,9 +95,7 @@ const Navbar = () => {
 					>
 						{routeItems}
 						{user ? (
-							<>
-								
-							</>
+							<></>
 						) : (
 							<>
 								<li className="h-full">
@@ -119,8 +119,7 @@ const Navbar = () => {
 				<ul className="menu menu-horizontal px-1 text-lg h-full items-center font-slab font-bold text-defaultBg">
 					{routeItems}
 					{user ? (
-						<>
-						</>
+						<></>
 					) : (
 						<>
 							<li className="h-full text-xl bg-theme2 rounded-lg">
@@ -158,11 +157,26 @@ const Navbar = () => {
 								className="mt-2 z-[1] p-2 shadow menu menu-sm dropdown-content bg-theme2 rounded-box text-black font-bold"
 							>
 								<li>
-									<Link to={"/update-profile"} className="text-lg text-nowrap">Update Profile</Link>
+									<Link to={"/update-profile"} className="text-lg text-nowrap">
+										Update Profile
+									</Link>
 								</li>
-								<li>
-									<Link className="text-lg">Dashboard</Link>
-								</li>
+								{user && isAdmin && (
+									<li>
+										<Link className="text-lg text-nowrap">Admin Dashboard</Link>
+									</li>
+								)}
+								{user && isSeller && (
+									<li>
+										<Link className="text-lg text-nowrap">Seller Dashboard</Link>
+									</li>
+								)}
+								{user && isCustomer && (
+									<li>
+										<Link className="text-lg">Dashboard</Link>
+									</li>
+								)}
+
 								<li>
 									<Link to={"/"} className="text-lg" onClick={() => logout()}>
 										Logout

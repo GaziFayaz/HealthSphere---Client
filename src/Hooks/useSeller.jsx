@@ -11,12 +11,12 @@ const useSeller = () => {
     enabled: !loading,
     queryFn: async () => {
       console.log('checking if user is seller', user)
-      const res = await axiosSecure.get(`/users/role`);
-      if( res.data.role === 'Seller') {
-        return true
-      } else {
-        return false
+      if(user){
+      const res = await axiosSecure.get(`/users/seller/${user?.email}`);
+            // console.log(res.data);
+            return res.data?.seller;
       }
+			return false
     }
   })
   return [isSeller, isSellerPending]
