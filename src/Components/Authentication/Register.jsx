@@ -54,7 +54,7 @@ const Register = () => {
 		createUserEmailPassword(data.email, data.password)
 			.then((userCredential) => {
 				// Signed up
-				console.log(userCredential);
+				// console.log(userCredential);
 				customizeProfile(data.name, data.photoUrl)
 					.then(() => {
 						const createdAt = userCredential.user?.metadata?.creationTime;
@@ -70,7 +70,7 @@ const Register = () => {
 
 						axiosPublic.post("/users", newUser).then((res) => {
 							if (res.data.insertedId) {
-								console.log("User created successfully");
+								// console.log("User created successfully");
 								reset();
 								successToast("Registration Successful");
 								window.location.reload();

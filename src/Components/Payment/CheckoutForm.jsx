@@ -122,6 +122,7 @@ const CheckoutForm = ({ orderData, clientSecret, user, cart, price }) => {
               date: new Date(),
               items: cart.items,
               transaction_id: paymentIntent.id,	
+							status: "pending"
             }
 						axiosSecure.post('/create-order', payment)
 						.then(res => {

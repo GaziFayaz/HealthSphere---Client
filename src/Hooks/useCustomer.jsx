@@ -10,16 +10,13 @@ const useCustomer = () => {
 		queryKey: [user?.email, "isCustomer"],
 		enabled: !loading,
 		queryFn: async () => {
-			console.log("checking if user is customer", user.email);
       if(user){
         const res = await axiosSecure.get(`/users/customer/${user?.email}`);
-			// console.log(res.data);
 			return res.data?.customer;
       }
 			return false
 		},
 	});
-	console.log("is customer", isCustomer);
 	return [isCustomer, isCustomerPending];
 };
 

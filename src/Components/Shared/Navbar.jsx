@@ -12,10 +12,9 @@ import useSeller from "../../Hooks/useSeller";
 const Navbar = () => {
 	const { user, loading, logout } = useContext(AuthContext);
 	const [isAdmin, isAdminPending] = useAdmin();
+	console.log(isAdmin, isAdminPending)
 	const [isCustomer, isCustomerPending] = useCustomer();
 	const [isSeller, isSellerPending] = useSeller();
-
-	console.log(isCustomer)
 
 	const activeLinkAttr = "bg-black text-white rounded-lg";
 	if (loading || isAdminPending || isCustomerPending || isSellerPending) {
@@ -163,7 +162,7 @@ const Navbar = () => {
 								</li>
 								{user && isAdmin && (
 									<li>
-										<Link className="text-lg text-nowrap">Admin Dashboard</Link>
+										<Link to={"/admin-dashboard"} className="text-lg text-nowrap">Admin Dashboard</Link>
 									</li>
 								)}
 								{user && isSeller && (

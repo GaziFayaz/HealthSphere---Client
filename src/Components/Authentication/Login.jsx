@@ -39,7 +39,7 @@ const Login = () => {
 		console.log(data);
 		signInEmailPassword(data.email, data.password)
 			.then((userCredential) => {
-				console.log(userCredential);
+				// console.log(userCredential);
 				successToast("Login Successful");
 				location.state ? navigate(location.state) : navigate(-1);
 			})
@@ -48,7 +48,7 @@ const Login = () => {
 				if (error.code === "auth/invalid-credential") {
 					errorToast("Invalid email or password");
 				}
-				console.log(error);
+				// console.log(error);
 			});
 	};
 
