@@ -97,7 +97,7 @@ const Sales = () => {
             </View>
           </View>
   
-          {orders.map((order, index) => {
+          {orders.map((order) => {
             return order?.items?.map((item, itemIndex) => {
               return (
                 <View key={itemIndex} style={styles.tableRow}>

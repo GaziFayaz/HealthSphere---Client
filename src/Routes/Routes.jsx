@@ -25,6 +25,7 @@ import SellerHome from "../Components/Seller/SellerHome";
 import Medicine from "../Components/Seller/Medicine";
 import History from "../Components/Seller/History";
 import Advertisement from "../Components/Seller/Advertisement";
+import PaymentHistory from "../Components/Customer/PaymentHistory";
 
 export const router = createBrowserRouter([
 	{
@@ -92,6 +93,16 @@ export const router = createBrowserRouter([
 				<CustomerDashboard></CustomerDashboard>
 			</PrivateRoute>
 		),
+    children: [
+      {
+        path: "/dashboard/payment-history",
+        element: (
+          <PrivateRoute>
+            <PaymentHistory></PaymentHistory>
+          </PrivateRoute>
+        )
+      }
+    ]
 	},
 	{
 		path: "/seller-dashboard",
