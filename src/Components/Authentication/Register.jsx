@@ -97,7 +97,7 @@ const Register = () => {
 		return (
 			<div className="flex justify-center ">
 				<Helmet>
-					<title>GlobeGuide | Register</title>
+					<title>HealthSphere | Register</title>
 				</Helmet>
 				<span className="loading loading-spinner loading-lg text-accent-pink "></span>
 			</div>
