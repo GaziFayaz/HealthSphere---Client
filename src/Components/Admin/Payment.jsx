@@ -32,10 +32,10 @@ const Payment = () => {
 	return (
 		<div className="w-full mt-24">
 			<Helmet>
-				<title>HealthSphere | Manage order</title>
+				<title>HealthSphere | Manage Payments</title>
 			</Helmet>
 			<h1 className="mb-8 text-2xl md:text-4xl lg:text-5xl font-slab font-bold text-theme2 text-center ">
-				Categories
+				Payments
 			</h1>
 			<div className="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
 				<Tabs className="w-full">
