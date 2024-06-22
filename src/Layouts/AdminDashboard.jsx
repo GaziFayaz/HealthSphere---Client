@@ -1,12 +1,14 @@
 import { NavLink, Outlet } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AdminDashboard = () => {
 	const activeLinkAttr =
 		"bg-gray-100 dark:bg-gray-800  dark:text-gray-200 text-gray-700";
 
 	return (
-		<div className="flex">
-			<aside className="flex flex-col w-64 min-h-full px-4 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
+		<div className="flex min-h-screen">
+			<aside className="min-w-24 flex flex-col w-64 min-h-full px-4 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
 				<div className="flex flex-col justify-between flex-1 mt-6">
 					<nav>
 						<NavLink
@@ -29,7 +31,7 @@ const AdminDashboard = () => {
 								/>
 							</svg>
 
-							<span className="mx-4 font-medium">Home</span>
+							<span className="hidden md:inline mx-4 font-medium">Home</span>
 						</NavLink>
 
 						<NavLink
@@ -63,7 +65,7 @@ const AdminDashboard = () => {
 								/>
 							</svg>
 
-							<span className="mx-4 font-medium">Overview</span>
+							<span className="hidden md:inline mx-4 font-medium">Overview</span>
 						</NavLink>
 
 						<NavLink
@@ -97,7 +99,7 @@ const AdminDashboard = () => {
 								/>
 							</svg>
 
-							<span className="mx-4 font-medium">Users</span>
+							<span className="hidden md:inline mx-4 font-medium">Users</span>
 						</NavLink>
 						<NavLink
 							to="/admin-dashboard/manage-category"
@@ -130,7 +132,7 @@ const AdminDashboard = () => {
 								/>
 							</svg>
 
-							<span className="mx-4 font-medium">Categories</span>
+							<span className="hidden md:inline mx-4 font-medium">Categories</span>
 						</NavLink>
 
 						<NavLink
@@ -157,7 +159,7 @@ const AdminDashboard = () => {
 								/>
 							</svg>
 
-							<span className="mx-4 font-medium">Payments</span>
+							<span className="hidden md:inline mx-4 font-medium">Payments</span>
 						</NavLink>
 
 						<NavLink
@@ -191,7 +193,7 @@ const AdminDashboard = () => {
 								/>
 							</svg>
 
-							<span className="mx-4 font-medium">Report</span>
+							<span className="hidden md:inline mx-4 font-medium">Report</span>
 						</NavLink>
 
 						<NavLink
@@ -218,12 +220,13 @@ const AdminDashboard = () => {
 								/>
 							</svg>
 
-							<span className="mx-4 font-medium">Banner</span>
+							<span className="hidden md:inline mx-4 font-medium">Banner</span>
 						</NavLink>
 					</nav>
 				</div>
 			</aside>
-      <Outlet></Outlet>
+			<Outlet></Outlet>
+      <ToastContainer />
 		</div>
 	);
 };

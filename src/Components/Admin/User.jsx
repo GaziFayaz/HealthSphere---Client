@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet-async";
-import { BiChevronDown } from "react-icons/bi";
 import { FaChevronDown } from "react-icons/fa6";
 
 const User = () => {
@@ -34,7 +33,6 @@ const User = () => {
 					{/* head */}
 					<thead className="lg:text-xl font-slab align-text-top">
 						<tr>
-							<th></th>
 							<th>User Email</th>
 							<th>Role</th>
 							<th>Action</th>
@@ -45,7 +43,6 @@ const User = () => {
 							if (user.role !== "Admin") {
 								return (
 									<tr key={index}>
-										<td></td>
 										<td className="font-bold">{user.user_email}</td>
 										<td className="font-bold">{user.role}</td>
 										<td className="font-bold">

@@ -8,12 +8,12 @@ import { Helmet } from "react-helmet-async";
 
 const CategoryDetails = () => {
 	const axiosPublic = useAxiosPublic();
-	const { slug } = useParams();
+	const { categoryId } = useParams();
 	const [loading, setLoading] = useState(true);
 	const [category, setCategory] = useState({});
 
 	useEffect(() => {
-		axiosPublic.get(`/categories/${slug}`).then((res) => {
+		axiosPublic.get(`/categories/${categoryId}`).then((res) => {
 			setCategory(res.data);
 			setLoading(false);
 		});

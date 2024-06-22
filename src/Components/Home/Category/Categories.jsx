@@ -22,7 +22,7 @@ const Categories = () => {
 				{categories.map((category, index) => {
 					return (
 						<Link 
-            key={index} to={`/categories/${category.slug}`}>
+            key={index} to={`/categories/${category._id}`}>
 							<div
 								className="card card-compact shadow-xl bg-theme relative"
 							>
