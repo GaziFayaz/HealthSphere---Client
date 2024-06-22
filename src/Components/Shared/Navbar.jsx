@@ -167,12 +167,12 @@ const Navbar = () => {
 								)}
 								{user && isSeller && (
 									<li>
-										<Link className="text-lg text-nowrap">Seller Dashboard</Link>
+										<Link to={"/seller-dashboard/overview"} className="text-lg text-nowrap">Seller Dashboard</Link>
 									</li>
 								)}
 								{user && isCustomer && (
 									<li>
-										<Link className="text-lg">Dashboard</Link>
+										<Link to={"/dashboard/payment-history"} className="text-lg">Dashboard</Link>
 									</li>
 								)}
 

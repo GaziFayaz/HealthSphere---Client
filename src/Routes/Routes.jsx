@@ -21,6 +21,10 @@ import Category from "../Components/Admin/Category";
 import Payment from "../Components/Admin/Payment";
 import Sales from "../Components/Admin/Sales";
 import Banner from "../Components/Admin/Banner";
+import SellerHome from "../Components/Seller/SellerHome";
+import Medicine from "../Components/Seller/Medicine";
+import History from "../Components/Seller/History";
+import Advertisement from "../Components/Seller/Advertisement";
 
 export const router = createBrowserRouter([
 	{
@@ -96,6 +100,40 @@ export const router = createBrowserRouter([
 				<SellerDashboard></SellerDashboard>
 			</SellerRoute>
 		),
+		children: [
+			{
+				path: "/seller-dashboard/overview",
+				element: (
+					<SellerRoute>
+						<SellerHome></SellerHome>
+					</SellerRoute>
+				),
+			},
+			{
+				path: "/seller-dashboard/manage-medicine",
+				element: (
+					<SellerRoute>
+						<Medicine></Medicine>
+					</SellerRoute>
+				),
+			},
+			{
+				path: "/seller-dashboard/payment-history",
+				element: (
+					<SellerRoute>
+						<History></History>
+					</SellerRoute>
+				),
+			},
+			{
+				path: "/seller-dashboard/request-advert",
+				element: (
+					<SellerRoute>
+						<Advertisement></Advertisement>
+					</SellerRoute>
+				),
+			},
+		],
 	},
 	{
 		path: "/admin-dashboard",
