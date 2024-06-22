@@ -26,6 +26,7 @@ const UpdateCategoryModal = ({ category, modalId, refetch }) => {
 		.then(res => {
 			console.log(res)
 			refetch();
+			document.getElementById(modalId).close();
 		})
 	};
 

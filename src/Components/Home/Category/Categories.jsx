@@ -28,8 +28,9 @@ const Categories = () => {
 							>
 								<figure>
 									<img
-										src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-										alt="Shoes"
+										src={category.image_url ? category.image_url : ""}
+										alt="category image"
+										className="h-[250px] w-full object-cover"
 									/>
 								</figure>
 								<div className="flex justify-center items-center">

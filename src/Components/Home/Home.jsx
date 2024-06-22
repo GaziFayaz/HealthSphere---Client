@@ -9,7 +9,7 @@ const Home = () => {
 			<Slider></Slider>
       <Categories></Categories>
       <DiscountSlider></DiscountSlider>
-      <QueriesSlider></QueriesSlider>
+      {/* <QueriesSlider></QueriesSlider> */}
 		</div>
 	);
 };
