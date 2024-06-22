@@ -7,8 +7,20 @@ import "swiper/css/pagination";
 // import required modules
 import { Autoplay, Navigation } from "swiper/modules";
 import Product from "../Product/Product";
+import { useEffect, useState } from "react";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const DiscountSlider = () => {
+	const [medicines, setMedicines] = useState([]);
+	const axiosPublic = useAxiosPublic()
+
+	useEffect(() => {
+		axiosPublic.get("/discounted-products")
+		.then(res => {
+			setMedicines(res.data)
+		})
+	}, [])
+
 	return (
 		<div className="w-full mt-24">
 			<h1 className="mb-8 text-2xl md:text-4xl lg:text-5xl font-slab font-bold text-theme2 text-center ">
@@ -37,39 +49,21 @@ const DiscountSlider = () => {
 						},
 						1024: {
 							slidesPerView: 4,
-							spaceBetween: 50,
+							spaceBetween: 40,
 						},
 					}}
 					modules={[Autoplay, Navigation]}
 					className="mySwiper"
 				>
-					<SwiperSlide>
-						<Product></Product>
-					</SwiperSlide>
-					<SwiperSlide>
-						<Product></Product>
-					</SwiperSlide>
-					<SwiperSlide>
-						<Product></Product>
-					</SwiperSlide>
-					<SwiperSlide>
-						<Product></Product>
-					</SwiperSlide>
-					<SwiperSlide>
-						<Product></Product>
-					</SwiperSlide>
-					<SwiperSlide>
-						<Product></Product>
-					</SwiperSlide>
-					<SwiperSlide>
-						<Product></Product>
-					</SwiperSlide>
-					<SwiperSlide>
-						<Product></Product>
-					</SwiperSlide>
-					<SwiperSlide>
-						<Product></Product>
-					</SwiperSlide>
+					{medicines.map((medicine, index) => {
+						return (
+							<SwiperSlide key={index}>
+								<Product
+									product={medicine}
+								></Product>
+							</SwiperSlide>
+						);
+					})}
 				</Swiper>
 			</div>
 		</div>

@@ -1,19 +1,19 @@
 
-const Product = () => {
+const Product = ({product}) => {
 	return (
 		<div>
 			<div className="card bg-base-100 shadow-xl">
 				<figure>
 					<img
-						src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-						alt="Shoes"
+						src={product.medicine_image? product.medicine_image : ""}
+						alt="Discounted Medicine"
+						className="min-h-[250px] max-h-[250px] object-cover"
 					/>
 				</figure>
 				<div className="card-body">
-					<h2 className="card-title">Shoes!</h2>
-					<p>If a dog chews shoes whose shoes does he choose?</p>
+					<h2 className="card-title">{product.medicine_name}</h2>
 					<div className="card-actions justify-end">
-						<button className="btn btn-primary">Buy Now</button>
+						<button className="p-4 rounded-xl text-black font-bold bg-theme">{product.discount_value}%</button>
 					</div>
 				</div>
 			</div>
