@@ -1,13 +1,13 @@
-import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../Providers/AuthProvider";
-import { useContext, useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
-import { Helmet } from "react-helmet-async";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useContext, useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
+import { useForm } from "react-hook-form";
+import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const Register = () => {
 	useEffect(() => {
@@ -73,8 +73,8 @@ const Register = () => {
 								// console.log("User created successfully");
 								reset();
 								successToast("Registration Successful");
+								navigate("/");
 								window.location.reload();
-								navigate("/")
 							}
 						});
 					})

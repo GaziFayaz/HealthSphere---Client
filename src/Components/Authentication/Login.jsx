@@ -41,7 +41,7 @@ const Login = () => {
 			.then((userCredential) => {
 				// console.log(userCredential);
 				successToast("Login Successful");
-				location.state ? navigate(location.state) : navigate(-1);
+				navigate("/");
 			})
 			.catch((error) => {
 				setLoading(false);
