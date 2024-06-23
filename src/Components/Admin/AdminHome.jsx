@@ -9,7 +9,7 @@ const AdminHome = () => {
 
 	useEffect(() => {
 		axiosSecure.get("/total-sales").then((res) => {
-			console.log(res.data);
+			// console.log(res.data);
 			setTotalSales(res.data.totalSales);
 			setTotalPaid(res.data.totalPaid);
 			setTotalPending(res.data.totalPending);
