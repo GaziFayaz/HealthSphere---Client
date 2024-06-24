@@ -15,7 +15,7 @@ const useAdmin = () => {
         // console.log(res?.data.admin)
 				return res.data?.admin;
 			}
-			// return false;
+			return false;
 		},
 	});
 	return [isAdmin, isAdminPending];

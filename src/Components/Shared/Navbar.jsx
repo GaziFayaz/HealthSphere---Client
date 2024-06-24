@@ -12,7 +12,6 @@ import useSeller from "../../Hooks/useSeller";
 const Navbar = () => {
 	const { user, loading, logout } = useContext(AuthContext);
 	const [isAdmin, isAdminPending] = useAdmin();
-	console.log(isAdmin, isAdminPending)
 	const [isCustomer, isCustomerPending] = useCustomer();
 	const [isSeller, isSellerPending] = useSeller();
 
